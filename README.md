@@ -8,3 +8,7 @@ https://www.raspberrypi-spy.co.uk/2016/07/using-bme280-i2c-temperature-pressure-
 https://bitbucket.org/MattHawkinsUK/rpispy-misc/raw/master/python/bme280.py
 
 https://github.com/Azure-Samples/azure-iot-samples-python/
+
+IoT Hub requires the following:
+  pip install azure-iothub-device-client
+  sudo apt-get install libboost-all-dev
