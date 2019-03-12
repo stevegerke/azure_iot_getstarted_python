@@ -168,7 +168,7 @@ def readBME280All(addr=DEVICE):
   elif humidity < 0:
     humidity = 0
 
-  return temperature/100.0,pressure/100.0,humidity
+  return ((temperature/100.0) * 9 / 5) + 32,pressure/100.0,humidity
 
 
 #---------- Microsoft start ----------
@@ -219,7 +219,7 @@ def iothub_client_telemetry_run():
 
             temperature,pressure,humidity = readBME280All()
 
-            print "Temperature : ", (temperature * 9 / 5) + 32, "F"
+            print "Temperature : ", temperature, "F"
             print "Pressure : ", pressure, "hPa"
             print "Humidity : ", humidity, "%"
 
@@ -244,7 +244,9 @@ def iothub_client_telemetry_run():
             # Send the message.
             print( "Sending message: %s" % message.get_string() )
             client.send_event_async(message, send_confirmation_callback, None)
-            time.sleep(10)
+
+            #sleep for 15 seconds so messages per day under free IoT Hub max of 8000
+            time.sleep(15)
 
     except IoTHubError as iothub_error:
         print ( "Unexpected error %s from IoTHub" % iothub_error )
