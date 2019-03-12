@@ -245,8 +245,8 @@ def iothub_client_telemetry_run():
             print( "Sending message: %s" % message.get_string() )
             client.send_event_async(message, send_confirmation_callback, None)
 
-            #sleep for 15 seconds so messages per day under free IoT Hub max of 8000
-            time.sleep(15)
+            #sleep for 60 seconds so messages per day is under free IoT Hub max of 8000
+            time.sleep(60)
 
     except IoTHubError as iothub_error:
         print ( "Unexpected error %s from IoTHub" % iothub_error )
